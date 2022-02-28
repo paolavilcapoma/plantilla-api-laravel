@@ -16,5 +16,4 @@ class cargo extends Model
     protected $uuidFieldName='id';
     protected $nombre='nombre';
     protected $descripcion='descripcion';
-    protected $esactivo='esactivo';
 }

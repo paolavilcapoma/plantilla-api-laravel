@@ -19,9 +19,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get("/cargo",[CargoControllers::class,"obtenerLista"]);
-Route::get("/cargo/{id}",[CargoControllers::class,"obtenerItem"]);
-Route::post("/cargo",[CargoControllers::class,"create"]);
-Route::put("/cargo",[CargoControllers::class,"update"]);
-Route::patch("/cargo",[CargoControllers::class,"patch"]);
-Route::delete("/cargo/{id}",[CargoControllers::class,"delete"]);
+Route::get('/cargo',[CargoControllers::class,'obtenerLista']);
+Route::get('/cargo/{id}',[CargoControllers::class,'obtenerItem']);
+Route::post('/cargo',[CargoControllers::class,'create']);
+Route::put('/cargo',[CargoControllers::class,'update']);
+Route::patch('/cargo',[CargoControllers::class,'patch']);
+Route::delete('/cargo/{id}',[CargoControllers::class,'delete']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\v1;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\v1\cargo;
+
 class CargoControllers extends Controller
 {
 
@@ -16,10 +17,10 @@ class CargoControllers extends Controller
 
     public function create(Request $request)
     {
+
         $cargo = new cargo();
         $cargo->nombre = $request->Nombre;
         $cargo->descripcion = $request->Descripcion;
-        $cargo->esactivo = $request->EsActivo;
         $cargo->save();
         $response = new \stdClass();
         $response->success = true;
@@ -31,36 +32,36 @@ class CargoControllers extends Controller
     {
         $response = new \stdClass();
         $response->success = true;
-        
+
         $cargo =  cargo::find($id);
-       
+
         if ($cargo) {
             $cargo->delete();
             $response_code = 500;
             return $cargo;
-        } 
-        else {
+        } else {
             $response->error = "el cargo ya fue eliminado";
             $response->success = true;
             $response->data = $cargo;
         }
-        
+
         return response()->json($response, 200);
     }
 
-    function update(Request $request, $id)
+    function update(Request $request)
     {
-        $cargo =  cargo::find($request->$id);
+        $response = new \stdClass();
+        $cargo =  cargo::find($request->id);
         if ($cargo) {
             $cargo->nombre = $request->nombre;
             $cargo->descripcion = $request->descripcion;
-            $cargo->esactivo = $request->esactivo;
             $cargo->save();
+        } else {
+        
+            $response->success = true;
+            $response->data = $cargo;
+            $response->error = "id no enontrado";
         }
-        $response = new \stdClass();
-        $response->success = true;
-        $response->data = $cargo;
-
         return response()->json($response, 200);
     }
 
@@ -70,7 +71,6 @@ class CargoControllers extends Controller
         if ($cargo) {
             if (isset($request->nombre))         $cargo->nombre = $request->nombre;
             if (isset($request->descripcion))       $cargo->descripcion = $request->descripcion;
-            if (isset($request->esactivo))      $cargo->esactivo = $request->esactivo;
         }
         $response = new \stdClass();
         $response->success = true;
@@ -82,7 +82,7 @@ class CargoControllers extends Controller
     {
         $response = new \stdClass();
         $response->success = true;
-        
+
         $cargo =  cargo::find($id);
         return $cargo;
         return response()->json($response, 200);
